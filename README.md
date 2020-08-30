@@ -14,6 +14,13 @@ Learn more about .obj files formatting [here](https://en.wikipedia.org/wiki/Wave
 
 ## Usage
 
+Run the script.
+
 ```console
 python minirt_converter.py <file.obj> <color>
 ```
+
+* `file.obj`: The file to be converted
+* `color`: The color of the triangles
+
+Then, add Resolution, Ambient Light, cameras and light points to your scene.
