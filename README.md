@@ -33,7 +33,7 @@ The `cat.rt`, `deer.rt` and `wolf.rt` scenes can be found [here](https://github.
 
 <p align="center">
   <img src="assets/cat.png" alt="cat" width="680" />
-  <img src="assets/wolf.png" alt="wolf" width="680" />
+  <img src="assets/wolf3d.png" alt="wolf" width="680" />
 </p>
 
 ### License
