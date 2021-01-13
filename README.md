@@ -32,7 +32,7 @@ Then, **add Resolution, Ambient Light, cameras and light points** to your [scene
 The `cat.rt`, `deer.rt` and `wolf.rt` scenes can be found [here](https://github.com/matboivin/miniRT/tree/master/scenes). They have approximately 1500 triangles each and my miniRT takes 3 minutes to render it, to give you an idea of the rendering time.
 
 <p align="center">
-  <img src="assets/cat.png" alt="cat" width="680" />
+  <img src="assets/smaug.png" alt="dragon" width="680" />
   <img src="assets/wolf3d.png" alt="wolf" width="680" />
 </p>
 
