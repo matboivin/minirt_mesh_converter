@@ -27,9 +27,9 @@ python minirt_converter.py <file.obj> <color>
 * `file.obj`: The file to be converted
 * `color`: The color of the triangles
 
-Then, **add Resolution, Ambient Light, cameras and light points** to your [scene](https://github.com/matboivin/miniRT/blob/master/doc/scene_file.md).
+Then, **add Resolution, Ambient Light, cameras and light points** to your [scene](https://github.com/matboivin/miniRT/blob/main/doc/scene_file.md).
 
-The `deer.rt`, `dragon.rt` and `wolf3d.rt` scenes can be found [here](https://github.com/matboivin/miniRT/tree/master/scenes). They have approximately 1500 triangles each and my miniRT takes 3 minutes to render it, to give you an idea of the rendering time.
+The `deer.rt`, `dragon.rt` and `wolf3d.rt` scenes can be found [here](https://github.com/matboivin/miniRT/tree/main/scenes).
 
 <p align="center">
   <img src="assets/dragon.png" alt="dragon" width="680" />
