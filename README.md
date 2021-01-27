@@ -42,3 +42,7 @@ The `deer.rt`, `dragon.rt` and `wolf3d.rt` scenes can be found [here](https://gi
 
 This work is licensed under a
 [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/).
+
+### Acknowledgements
+
+Many thanks to [MrMoustach](https://github.com/MrMoustach) for contributing!
