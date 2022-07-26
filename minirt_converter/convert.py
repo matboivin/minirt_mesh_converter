@@ -84,7 +84,7 @@ def parse_vertices_coords(vertices: List[str]) -> Dict[str, Dict[str, str]]:
     vertices_count: int = 1
 
     for vertex in vertices:
-        if vertex[:2] == "v ":  # Geometric vertex (v x, y, z, [w])
+        if vertex[:2] == "v ":  # Geometric vertex (v x y z [w])
             coordinates: List[str] = vertex.split(" ")
             vertices_coords[str(vertices_count)] = {
                 "x": coordinates[1],
