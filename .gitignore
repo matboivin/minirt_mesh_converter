@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 
 obj_files/
+*.obj
+*.rt

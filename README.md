@@ -1,4 +1,4 @@
-# An ugly script to convert .obj files for miniRT
+# Convert .obj files for 42's miniRT
 
 Convert `.obj` files to `.rt` files to render a triangle mesh effect for [miniRT](https://github.com/matboivin/raytracer) project at 42.
 
@@ -8,7 +8,7 @@ Convert `.obj` files to `.rt` files to render a triangle mesh effect for [miniRT
 
 ## Requirements
 
-* Python 3.6 or greater
+* Python 3.9 or greater
 * Learn more about `.obj` files formatting [here](https://en.wikipedia.org/wiki/Wavefront_.obj_file).
 
 ## Installation
@@ -17,14 +17,21 @@ Clone the repository and change it to your working directory.
 
 ## Usage
 
-Run the script:
-
 ```console
-python minirt_converter.py <file.obj> <color>
-```
+minirt_converter [-h] filename color
 
-* `file.obj`: The file to be converted
-* `color`: The color of the triangles
+Convert .obj files to .rt files to render a triangle mesh effect for miniRT project at 42.
+
+positional arguments:
+  filename    obj file to convert.
+  color       the color in RGB format (e.g., 255,255,255).
+
+optional arguments:
+  -h, --help  show this help message and exit
+
+example usage:
+  minirt_converter file.obj 255,255,255
+```
 
 Then, **add Resolution, Ambient Light, cameras and light points** to your [scene](https://github.com/matboivin/raytracer/blob/main/doc/scene_file.md).
 
@@ -37,7 +44,7 @@ The `deer.rt`, `dragon.rt` and `wolf3d.rt` scenes can be found [here](https://gi
 
 ## Acknowledgements
 
-Many thanks to [MrMoustach](https://github.com/MrMoustach) for contributing!
+Many thanks to [MrMoustach](https://github.com/MrMoustach) for contributing by adding a polygon support!
 
 ## License
 
