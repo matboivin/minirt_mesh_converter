@@ -84,7 +84,7 @@ def parse_vertices_coords(vertices: List[str]) -> Dict[str, Dict[str, str]]:
     vertices_count: int = 1
 
     for vertex in vertices:
-        if vertex[:2] == "v ":
+        if vertex[:2] == "v ":  # Geometric vertex (v x, y, z, [w])
             coordinates: List[str] = vertex.split(" ")
             vertices_coords[str(vertices_count)] = {
                 "x": coordinates[1],
@@ -114,10 +114,12 @@ def save_polygons_to_file(filename: str, vertices: List[str],
                                     str]] = parse_vertices_coords(vertices)
 
     with open(filename, "w") as out:
+
         for vertex in vertices:
-            if vertex[:2] == "f ":
+            if vertex[:2] == "f ":  # Polygonal face element (f 1 2 3)
                 polygons: List[str] = get_polygons_from_face(
                     vertex, vertices_coords, color)
+
                 for polygon in polygons:
                     out.write(polygon)
 
