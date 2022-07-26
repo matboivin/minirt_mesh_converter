@@ -66,13 +66,13 @@ def get_polygons_from_face(face: str, vertices_coords: Dict[str, Dict[str,
     return polygons
 
 
-def parse_vertices_coords(vertices: List[str]) -> Dict[str, Dict[str, str]]:
+def parse_vertices_coords(obj_data: List[str]) -> Dict[str, Dict[str, str]]:
     """Parse vertices coordinates (x, y, z).
 
     Parameters
     ----------
-    vertices : List[str]
-        List of geometric vertices: v x y z [w]
+    obj_data : List[str]
+        List obj elements.
 
     Returns
     -------
@@ -83,20 +83,21 @@ def parse_vertices_coords(vertices: List[str]) -> Dict[str, Dict[str, str]]:
     vertices_coords: Dict[str, Dict[str, str]] = {}
     vertices_count: int = 1
 
-    for vertex in vertices:
-        if vertex[:2] == "v ":  # Geometric vertex (v x y z [w])
-            coordinates: List[str] = vertex.split(" ")
+    for element in obj_data:
+        if element[:2] == "v ":  # Geometric vertex (v x y z [w])
+            vertex_coords: List[str] = element.split(" ")
+
             vertices_coords[str(vertices_count)] = {
-                "x": coordinates[1],
-                "y": coordinates[2],
-                "z": coordinates[3][:-1]
+                "x": vertex_coords[1],
+                "y": vertex_coords[2],
+                "z": vertex_coords[3][:-1]
             }
             vertices_count += 1
 
     return vertices_coords
 
 
-def save_polygons_to_file(filename: str, vertices: List[str],
+def save_polygons_to_file(filename: str, obj_data: List[str],
                           color: str) -> None:
     """Parse vertices coordinates (x, y, z).
 
@@ -104,21 +105,21 @@ def save_polygons_to_file(filename: str, vertices: List[str],
     ----------
     filename : str
         The output filename.
-    vertices : List[str]
-        List of geometric vertices: v x y z [w]
+    obj_data : List[str]
+        List obj elements.
     color : str
         The color of the object in RGB format.
 
     """
     vertices_coords: Dict[str, Dict[str,
-                                    str]] = parse_vertices_coords(vertices)
+                                    str]] = parse_vertices_coords(obj_data)
 
     with open(filename, "w") as out:
 
-        for vertex in vertices:
-            if vertex[:2] == "f ":  # Polygonal face element (f 1 2 3)
+        for element in obj_data:
+            if element[:2] == "f ":  # Polygonal face element (f 1 2 3)
                 polygons: List[str] = get_polygons_from_face(
-                    vertex, vertices_coords, color)
+                    element, vertices_coords, color)
 
                 for polygon in polygons:
                     out.write(polygon)
@@ -140,6 +141,6 @@ def convert_obj_to_rt(filename: str, color: str) -> None:
     out_filename: str = filename.split(".")[0] + ".rt"
 
     with open(filename, "r") as f:
-        vertices: List[str] = f.readlines()
+        obj_data: List[str] = f.readlines()
 
-    save_polygons_to_file(out_filename, vertices, color)
+    save_polygons_to_file(out_filename, obj_data, color)
