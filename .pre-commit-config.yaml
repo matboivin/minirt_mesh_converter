@@ -62,4 +62,3 @@ repos:
     - id: check-added-large-files
     - id: check-yaml
       args: [--allow-multiple-documents]
-    - id: detect-private-key
