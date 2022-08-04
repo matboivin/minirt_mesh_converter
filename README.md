@@ -15,6 +15,10 @@ Convert `.obj` files to `.rt` files to render a triangle mesh effect for [miniRT
 
 Clone the repository and change it to your working directory.
 
+```console
+python3 setup.py install
+```
+
 ## Usage
 
 ```console
