@@ -1,4 +1,11 @@
-"""Helper functions."""
+"""Command line helper functions.
+
+Example usage:
+
+```sh
+minirt_converter file.obj 255,204,0
+```
+"""
 
 from argparse import ArgumentParser, Namespace
 

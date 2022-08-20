@@ -33,6 +33,7 @@ repos:
     hooks:
     - id: pydocstyle
       args: ['--ignore=D213,D203,D204,D416']
+      exclude: "minirt_converter/__init__.py"
 
   - repo: local
     hooks:
