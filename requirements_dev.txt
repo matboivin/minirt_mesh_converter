@@ -1,3 +1,4 @@
 bandit
+pdoc3
 pre-commit
 pycodestyle
