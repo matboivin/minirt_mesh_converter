@@ -1,0 +1,47 @@
+[tool.poetry]
+name = "minirt_converter"
+version = "1.0.0"
+description = "Convert .obj files to .rt files to render a triangle mesh effect for miniRT project at 42."
+authors = ["mboivin <mboivin@student.42.fr>"]
+license = "CC BY-NC 4.0"
+readme = "README.md"
+repository = "https://github.com/matboivin/minirt_mesh_converter"
+classifiers = [
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3"
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+bandit = "^1.7.4"
+black = "^22.6.0"
+pre-commit = "^2.20.0"
+pycodestyle = "^2.9.1"
+
+[tool.black]
+target-version = ["py37"]
+line-length = 79
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.poetry.scripts]
+minirt_converter = 'minirt_converter.main:entrypoint'
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

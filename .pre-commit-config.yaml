@@ -10,20 +10,17 @@ repos:
         --remove-all-unused-imports,
       ]
 
-  - repo: https://github.com/pre-commit/mirrors-yapf
-    rev: v0.32.0
+  - repo: https://github.com/psf/black
+    rev: 22.6.0
     hooks:
-    - id: yapf
-      args: [
-        --in-place
-      ]
+    - id: black
+      language_version: python3.9
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v0.942
     hooks:
     - id: mypy
-      additional_dependencies:
-        - types-requests
+      additional_dependencies: [types-requests]
       args: [
         --strict,
         --ignore-missing-imports,
@@ -35,9 +32,7 @@ repos:
     rev: 4.0.0
     hooks:
     - id: pydocstyle
-      args: [
-        '--ignore=D213,D203,D204,D416'
-      ]
+      args: ['--ignore=D213,D203,D204,D416']
 
   - repo: local
     hooks:
@@ -51,6 +46,11 @@ repos:
         '--exclude=*init*'
       ]
       files: \.py$
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.4
+    hooks:
+    - id: bandit
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0

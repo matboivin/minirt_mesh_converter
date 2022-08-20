@@ -1,5 +1,7 @@
 # Convert .obj files for 42's miniRT
 
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit) [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
+
 Convert `.obj` files to `.rt` files to render a triangle mesh effect for [miniRT](https://github.com/matboivin/raytracer) project at 42.
 
 <p align="center">
@@ -16,7 +18,7 @@ Convert `.obj` files to `.rt` files to render a triangle mesh effect for [miniRT
 Clone the repository and change it to your working directory.
 
 ```console
-python3 setup.py install
+$ poetry install
 ```
 
 ## Usage

@@ -3,9 +3,9 @@
 from typing import Dict, List
 
 
-def get_triangles_from_face(face: str, vertices_coords: Dict[str, Dict[str,
-                                                                       str]],
-                            color: str) -> List[str]:
+def get_triangles_from_face(
+    face: str, vertices_coords: Dict[str, Dict[str, str]], color: str
+) -> List[str]:
     """Get triangles from face element coordinates.
 
     Parameters
@@ -29,17 +29,29 @@ def get_triangles_from_face(face: str, vertices_coords: Dict[str, Dict[str,
         tmp[i].split("/")[0] for i in range(1, len(tmp))
     ]
 
-    vertex1: str = ",".join((vertices_coords[matching_coords[0]]["x"],
-                             vertices_coords[matching_coords[0]]["y"],
-                             vertices_coords[matching_coords[0]]["z"]))
+    vertex1: str = ",".join(
+        (
+            vertices_coords[matching_coords[0]]["x"],
+            vertices_coords[matching_coords[0]]["y"],
+            vertices_coords[matching_coords[0]]["z"],
+        )
+    )
 
-    vertex2: str = ",".join((vertices_coords[matching_coords[1]]["x"],
-                             vertices_coords[matching_coords[1]]["y"],
-                             vertices_coords[matching_coords[1]]["z"]))
+    vertex2: str = ",".join(
+        (
+            vertices_coords[matching_coords[1]]["x"],
+            vertices_coords[matching_coords[1]]["y"],
+            vertices_coords[matching_coords[1]]["z"],
+        )
+    )
 
-    vertex3: str = ",".join((vertices_coords[matching_coords[2]]["x"],
-                             vertices_coords[matching_coords[2]]["y"],
-                             vertices_coords[matching_coords[2]]["z"]))
+    vertex3: str = ",".join(
+        (
+            vertices_coords[matching_coords[2]]["x"],
+            vertices_coords[matching_coords[2]]["y"],
+            vertices_coords[matching_coords[2]]["z"],
+        )
+    )
 
     triangle: str = " ".join(("tr", vertex1, vertex2, vertex3, color)) + "\n"
     triangles.append(triangle)
@@ -54,12 +66,17 @@ def get_triangles_from_face(face: str, vertices_coords: Dict[str, Dict[str,
     # 1-------2
     # 1 2 3 4 into 1 2 3 and 1 3 4
     if len(tmp) > 5:
-        vertex4: str = ",".join((vertices_coords[matching_coords[3]]["x"],
-                                 vertices_coords[matching_coords[3]]["y"],
-                                 vertices_coords[matching_coords[3]]["z"]))
+        vertex4: str = ",".join(
+            (
+                vertices_coords[matching_coords[3]]["x"],
+                vertices_coords[matching_coords[3]]["y"],
+                vertices_coords[matching_coords[3]]["z"],
+            )
+        )
 
-        matching_triangle: str = " ".join(
-            ("tr", vertex1, vertex3, vertex4, color)) + "\n"
+        matching_triangle: str = (
+            " ".join(("tr", vertex1, vertex3, vertex4, color)) + "\n"
+        )
         triangles.append(matching_triangle)
 
     return triangles
@@ -89,15 +106,16 @@ def parse_vertices_coords(obj_data: List[str]) -> Dict[str, Dict[str, str]]:
             vertices_coords[str(vertices_count)] = {
                 "x": vertex_coords[1],
                 "y": vertex_coords[2],
-                "z": vertex_coords[3][:-1]
+                "z": vertex_coords[3][:-1],
             }
             vertices_count += 1
 
     return vertices_coords
 
 
-def save_polygons_to_file(filename: str, obj_data: List[str],
-                          color: str) -> None:
+def save_polygons_to_file(
+    filename: str, obj_data: List[str], color: str
+) -> None:
     """Parse vertices coordinates (x, y, z).
 
     Parameters
@@ -110,15 +128,17 @@ def save_polygons_to_file(filename: str, obj_data: List[str],
         The color of the object in RGB format.
 
     """
-    vertices_coords: Dict[str, Dict[str,
-                                    str]] = parse_vertices_coords(obj_data)
+    vertices_coords: Dict[str, Dict[str, str]] = parse_vertices_coords(
+        obj_data
+    )
 
     with open(filename, "w") as out:
 
         for element in obj_data:
             if element[:2] == "f ":  # Polygonal face element (f 1 2 3)
                 polygons: List[str] = get_triangles_from_face(
-                    element, vertices_coords, color)
+                    element, vertices_coords, color
+                )
 
                 for polygon in polygons:
                     out.write(polygon)
