@@ -5,12 +5,13 @@
 Convert `.obj` files to `.rt` files to render a triangle mesh effect for [miniRT](https://github.com/matboivin/raytracer) project at 42.
 
 <p align="center">
-  <img src="assets/deer.png" alt="deer" width="680" />
+  <img src="docs/assets/deer.png" alt="deer" width="680" />
 </p>
 
 ## Requirements
 
 * Python 3.9 or greater
+* [`poetry`](https://python-poetry.org/)
 * Learn more about `.obj` files formatting [here](https://en.wikipedia.org/wiki/Wavefront_.obj_file).
 
 ## Installation
@@ -44,8 +45,8 @@ Then, **add Resolution, Ambient Light, cameras and light points** to your [scene
 The `deer.rt`, `dragon.rt` and `wolf3d.rt` scenes can be found [here](https://github.com/matboivin/raytracer/tree/main/scenes).
 
 <p align="center">
-  <img src="assets/dragon.png" alt="dragon" width="680" />
-  <img src="assets/wolf3d.png" alt="wolf" width="680" />
+  <img src="docs/assets/dragon.png" alt="dragon" width="680" />
+  <img src="docs/assets/wolf3d.png" alt="wolf" width="680" />
 </p>
 
 ## Acknowledgements
