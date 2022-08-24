@@ -29,7 +29,6 @@ repos:
     rev: v0.942
     hooks:
     - id: mypy
-      additional_dependencies: [types-requests]
 
   - repo: https://github.com/pycqa/pydocstyle
     rev: 4.0.0
