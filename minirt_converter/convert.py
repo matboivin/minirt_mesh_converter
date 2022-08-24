@@ -52,8 +52,7 @@ def get_triangles_from_face(
         )
     )
 
-    triangle: str = " ".join(("tr", vertex1, vertex2, vertex3, color))
-    triangles.append(triangle)
+    triangles.append(f"tr {vertex1} {vertex2} {vertex3} {color}")
 
     # if a face line has more than 5 params then its a quad not a tris therefore
     # we transform the quad into a tris.. still have to implement other polyons.
@@ -72,11 +71,7 @@ def get_triangles_from_face(
                 vertices_coords[matching_coords[3]]["z"],
             )
         )
-
-        matching_triangle: str = " ".join(
-            ("tr", vertex1, vertex3, vertex4, color)
-        )
-        triangles.append(matching_triangle)
+        triangles.append(f"tr {vertex1} {vertex3} {vertex4} {color}")
 
 
 def parse_vertices_coords(obj_data: List[str]) -> Dict[str, Dict[str, str]]:
