@@ -10,7 +10,7 @@ documentation = "https://matboivin.github.io/minirt_mesh_converter/"
 classifiers = [
   "Intended Audience :: Developers",
   "Operating System :: OS Independent",
-  "Programming Language :: Python :: 3"
+  "Programming Language :: Python :: 3.9"
 ]
 
 [tool.poetry.dependencies]
@@ -19,12 +19,13 @@ python = "^3.9"
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.4"
 black = "^22.6.0"
+isort = "^5.10.1"
+pdoc3 = "^0.10.0"
 pre-commit = "^2.20.0"
 pycodestyle = "^2.9.1"
-pdoc3 = "^0.10.0"
+pylint = "^2.14.5"
 
 [tool.black]
-target-version = ["py37"]
 line-length = 79
 include = '\.pyi?$'
 exclude = '''
@@ -40,6 +41,15 @@ exclude = '''
   | dist
 )/
 '''
+
+[tool.mypy]
+pretty = true
+show_traceback = true
+color_output = true
+strict = true
+ignore_missing_imports = true
+allow_untyped_decorators = true
+allow_subclassing_any = true
 
 [tool.poetry.scripts]
 minirt_converter = 'minirt_converter.main:entrypoint'

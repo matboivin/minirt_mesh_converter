@@ -1,4 +1,13 @@
+default_language_version:
+    python: python3.9
+
 repos:
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]
 
   - repo: https://github.com/myint/autoflake
     rev: v1.4
@@ -21,12 +30,6 @@ repos:
     hooks:
     - id: mypy
       additional_dependencies: [types-requests]
-      args: [
-        --strict,
-        --ignore-missing-imports,
-        --allow-untyped-decorators,
-        --allow-subclassing-any
-      ]
 
   - repo: https://github.com/pycqa/pydocstyle
     rev: 4.0.0

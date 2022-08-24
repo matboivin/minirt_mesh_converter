@@ -3,8 +3,8 @@
 import os
 from argparse import Namespace
 
-from .helpers import parse_args
 from .convert import convert_obj_to_rt
+from .helpers import parse_args
 
 
 def main(filename: str, color: str) -> None:

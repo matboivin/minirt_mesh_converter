@@ -33,8 +33,11 @@ from typing import Dict, List
 
 
 def get_triangles_from_face(
-    face: str, vertices_coords: Dict[str, Dict[str, str]], color: str
-) -&gt; List[str]:
+    face: str,
+    vertices_coords: Dict[str, Dict[str, str]],
+    color: str,
+    triangles: List[str],
+) -&gt; None:
     &#34;&#34;&#34;Get triangles from face element coordinates.
 
     Parameters
@@ -45,14 +48,10 @@ def get_triangles_from_face(
         Vertices coordinates parsed from .obj file.
     color : str
         The color of the object in RGB format.
-
-    Returns
-    -------
-    list of str
-        Triangles.
+    triangles : list of str
+        The list to which append new triangles.
 
     &#34;&#34;&#34;
-    triangles: List[str] = []
     tmp: List[str] = face.split(&#34; &#34;)
     matching_coords: List[str] = [
         tmp[i].split(&#34;/&#34;)[0] for i in range(1, len(tmp))
@@ -82,7 +81,7 @@ def get_triangles_from_face(
         )
     )
 
-    triangle: str = &#34; &#34;.join((&#34;tr&#34;, vertex1, vertex2, vertex3, color)) + &#34;\n&#34;
+    triangle: str = &#34; &#34;.join((&#34;tr&#34;, vertex1, vertex2, vertex3, color))
     triangles.append(triangle)
 
     # if a face line has more than 5 params then its a quad not a tris therefore
@@ -103,12 +102,10 @@ def get_triangles_from_face(
             )
         )
 
-        matching_triangle: str = (
-            &#34; &#34;.join((&#34;tr&#34;, vertex1, vertex3, vertex4, color)) + &#34;\n&#34;
+        matching_triangle: str = &#34; &#34;.join(
+            (&#34;tr&#34;, vertex1, vertex3, vertex4, color)
         )
         triangles.append(matching_triangle)
-
-    return triangles
 
 
 def parse_vertices_coords(obj_data: List[str]) -&gt; Dict[str, Dict[str, str]]:
@@ -161,16 +158,17 @@ def save_polygons_to_file(
         obj_data
     )
 
-    with open(filename, &#34;w&#34;) as out:
+    with open(filename, mode=&#34;w&#34;, encoding=&#34;utf-8&#34;) as out:
+
+        triangles: List[str] = []
 
         for element in obj_data:
             if element[:2] == &#34;f &#34;:  # Polygonal face element (f 1 2 3)
-                polygons: List[str] = get_triangles_from_face(
-                    element, vertices_coords, color
+                get_triangles_from_face(
+                    element, vertices_coords, color, triangles
                 )
 
-                for polygon in polygons:
-                    out.write(polygon)
+        out.write(&#34;\n&#34;.join(triangles) + &#34;\n&#34;)
 
     print(f&#34;==&gt; Result saved in: &#39;{filename}&#39;.&#34;)
 
@@ -188,8 +186,8 @@ def convert_obj_to_rt(filename: str, color: str) -&gt; None:
     &#34;&#34;&#34;
     out_filename: str = filename.split(&#34;.&#34;)[0] + &#34;.rt&#34;
 
-    with open(filename, &#34;r&#34;) as f:
-        obj_data: List[str] = f.readlines()
+    with open(filename, mode=&#34;r&#34;, encoding=&#34;utf-8&#34;) as file_handle:
+        obj_data: List[str] = file_handle.readlines()
 
     save_polygons_to_file(out_filename, obj_data, color)</code></pre>
 </details>
@@ -230,14 +228,14 @@ def convert_obj_to_rt(filename: str, color: str) -&gt; None:
     &#34;&#34;&#34;
     out_filename: str = filename.split(&#34;.&#34;)[0] + &#34;.rt&#34;
 
-    with open(filename, &#34;r&#34;) as f:
-        obj_data: List[str] = f.readlines()
+    with open(filename, mode=&#34;r&#34;, encoding=&#34;utf-8&#34;) as file_handle:
+        obj_data: List[str] = file_handle.readlines()
 
     save_polygons_to_file(out_filename, obj_data, color)</code></pre>
 </details>
 </dd>
 <dt id="minirt_converter.convert.get_triangles_from_face"><code class="name flex">
-<span>def <span class="ident">get_triangles_from_face</span></span>(<span>face: str, vertices_coords: Dict[str, Dict[str, str]], color: str) ‑> List[str]</span>
+<span>def <span class="ident">get_triangles_from_face</span></span>(<span>face: str, vertices_coords: Dict[str, Dict[str, str]], color: str, triangles: List[str]) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Get triangles from face element coordinates.</p>
@@ -249,19 +247,19 @@ def convert_obj_to_rt(filename: str, color: str) -&gt; None:
 <dd>Vertices coordinates parsed from .obj file.</dd>
 <dt><strong><code>color</code></strong> :&ensp;<code>str</code></dt>
 <dd>The color of the object in RGB format.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>list</code> of <code>str</code></dt>
-<dd>Triangles.</dd>
+<dt><strong><code>triangles</code></strong> :&ensp;<code>list</code> of <code>str</code></dt>
+<dd>The list to which append new triangles.</dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_triangles_from_face(
-    face: str, vertices_coords: Dict[str, Dict[str, str]], color: str
-) -&gt; List[str]:
+    face: str,
+    vertices_coords: Dict[str, Dict[str, str]],
+    color: str,
+    triangles: List[str],
+) -&gt; None:
     &#34;&#34;&#34;Get triangles from face element coordinates.
 
     Parameters
@@ -272,14 +270,10 @@ def convert_obj_to_rt(filename: str, color: str) -&gt; None:
         Vertices coordinates parsed from .obj file.
     color : str
         The color of the object in RGB format.
-
-    Returns
-    -------
-    list of str
-        Triangles.
+    triangles : list of str
+        The list to which append new triangles.
 
     &#34;&#34;&#34;
-    triangles: List[str] = []
     tmp: List[str] = face.split(&#34; &#34;)
     matching_coords: List[str] = [
         tmp[i].split(&#34;/&#34;)[0] for i in range(1, len(tmp))
@@ -309,7 +303,7 @@ def convert_obj_to_rt(filename: str, color: str) -&gt; None:
         )
     )
 
-    triangle: str = &#34; &#34;.join((&#34;tr&#34;, vertex1, vertex2, vertex3, color)) + &#34;\n&#34;
+    triangle: str = &#34; &#34;.join((&#34;tr&#34;, vertex1, vertex2, vertex3, color))
     triangles.append(triangle)
 
     # if a face line has more than 5 params then its a quad not a tris therefore
@@ -330,12 +324,10 @@ def convert_obj_to_rt(filename: str, color: str) -&gt; None:
             )
         )
 
-        matching_triangle: str = (
-            &#34; &#34;.join((&#34;tr&#34;, vertex1, vertex3, vertex4, color)) + &#34;\n&#34;
+        matching_triangle: str = &#34; &#34;.join(
+            (&#34;tr&#34;, vertex1, vertex3, vertex4, color)
         )
-        triangles.append(matching_triangle)
-
-    return triangles</code></pre>
+        triangles.append(matching_triangle)</code></pre>
 </details>
 </dd>
 <dt id="minirt_converter.convert.parse_vertices_coords"><code class="name flex">
@@ -425,16 +417,17 @@ def convert_obj_to_rt(filename: str, color: str) -&gt; None:
         obj_data
     )
 
-    with open(filename, &#34;w&#34;) as out:
+    with open(filename, mode=&#34;w&#34;, encoding=&#34;utf-8&#34;) as out:
+
+        triangles: List[str] = []
 
         for element in obj_data:
             if element[:2] == &#34;f &#34;:  # Polygonal face element (f 1 2 3)
-                polygons: List[str] = get_triangles_from_face(
-                    element, vertices_coords, color
+                get_triangles_from_face(
+                    element, vertices_coords, color, triangles
                 )
 
-                for polygon in polygons:
-                    out.write(polygon)
+        out.write(&#34;\n&#34;.join(triangles) + &#34;\n&#34;)
 
     print(f&#34;==&gt; Result saved in: &#39;{filename}&#39;.&#34;)</code></pre>
 </details>

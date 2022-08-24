@@ -4,8 +4,11 @@ from typing import Dict, List
 
 
 def get_triangles_from_face(
-    face: str, vertices_coords: Dict[str, Dict[str, str]], color: str
-) -> List[str]:
+    face: str,
+    vertices_coords: Dict[str, Dict[str, str]],
+    color: str,
+    triangles: List[str],
+) -> None:
     """Get triangles from face element coordinates.
 
     Parameters
@@ -16,14 +19,10 @@ def get_triangles_from_face(
         Vertices coordinates parsed from .obj file.
     color : str
         The color of the object in RGB format.
-
-    Returns
-    -------
-    list of str
-        Triangles.
+    triangles : list of str
+        The list to which append new triangles.
 
     """
-    triangles: List[str] = []
     tmp: List[str] = face.split(" ")
     matching_coords: List[str] = [
         tmp[i].split("/")[0] for i in range(1, len(tmp))
@@ -53,7 +52,7 @@ def get_triangles_from_face(
         )
     )
 
-    triangle: str = " ".join(("tr", vertex1, vertex2, vertex3, color)) + "\n"
+    triangle: str = " ".join(("tr", vertex1, vertex2, vertex3, color))
     triangles.append(triangle)
 
     # if a face line has more than 5 params then its a quad not a tris therefore
@@ -74,12 +73,10 @@ def get_triangles_from_face(
             )
         )
 
-        matching_triangle: str = (
-            " ".join(("tr", vertex1, vertex3, vertex4, color)) + "\n"
+        matching_triangle: str = " ".join(
+            ("tr", vertex1, vertex3, vertex4, color)
         )
         triangles.append(matching_triangle)
-
-    return triangles
 
 
 def parse_vertices_coords(obj_data: List[str]) -> Dict[str, Dict[str, str]]:
@@ -132,16 +129,17 @@ def save_polygons_to_file(
         obj_data
     )
 
-    with open(filename, "w") as out:
+    with open(filename, mode="w", encoding="utf-8") as out:
+
+        triangles: List[str] = []
 
         for element in obj_data:
             if element[:2] == "f ":  # Polygonal face element (f 1 2 3)
-                polygons: List[str] = get_triangles_from_face(
-                    element, vertices_coords, color
+                get_triangles_from_face(
+                    element, vertices_coords, color, triangles
                 )
 
-                for polygon in polygons:
-                    out.write(polygon)
+        out.write("\n".join(triangles) + "\n")
 
     print(f"==> Result saved in: '{filename}'.")
 
@@ -159,7 +157,7 @@ def convert_obj_to_rt(filename: str, color: str) -> None:
     """
     out_filename: str = filename.split(".")[0] + ".rt"
 
-    with open(filename, "r") as f:
-        obj_data: List[str] = f.readlines()
+    with open(filename, mode="r", encoding="utf-8") as file_handle:
+        obj_data: List[str] = file_handle.readlines()
 
     save_polygons_to_file(out_filename, obj_data, color)
