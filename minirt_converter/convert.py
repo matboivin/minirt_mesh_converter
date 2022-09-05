@@ -1,6 +1,9 @@
 """Convert .obj file to .rt file."""
 
+from pathlib import Path
 from typing import Dict, List
+
+from verboselogs import VerboseLogger
 
 
 def get_triangles_from_face(
@@ -106,13 +109,13 @@ def parse_vertices_coords(obj_data: List[str]) -> Dict[str, Dict[str, str]]:
 
 
 def save_polygons_to_file(
-    filename: str, obj_data: List[str], color: str
+    filename: Path, obj_data: List[str], color: str
 ) -> None:
     """Parse vertices coordinates (x, y, z).
 
     Parameters
     ----------
-    filename : str
+    filename : Path
         The output filename.
     obj_data : list of str
         List obj elements.
@@ -124,7 +127,7 @@ def save_polygons_to_file(
         obj_data
     )
 
-    with open(filename, mode="w", encoding="utf-8") as out:
+    with filename.open(mode="w", encoding="utf-8") as out:
 
         triangles: List[str] = []
 
@@ -136,23 +139,29 @@ def save_polygons_to_file(
 
         out.write("\n".join(triangles) + "\n")
 
-    print(f"==> Result saved in: '{filename}'.")
 
-
-def convert_obj_to_rt(filename: str, color: str) -> None:
+def convert_obj_to_rt(
+    logger: VerboseLogger, filename: Path, color: str
+) -> None:
     """Convert .obj file to .rt format.
 
     Parameters
     ----------
-    filename : str
+    logger : VerboseLogger
+        The program's logger.
+    filename : Path
         The file to convert.
     color : str
         The color of the object in RGB format.
 
     """
-    out_filename: str = filename.split(".")[0] + ".rt"
+    outfile: Path = filename.with_suffix(".rt")
 
-    with open(filename, mode="r", encoding="utf-8") as file_handle:
+    with filename.open(mode="r", encoding="utf-8") as file_handle:
         obj_data: List[str] = file_handle.readlines()
 
-    save_polygons_to_file(out_filename, obj_data, color)
+    logger.info("Start conversion.")
+
+    save_polygons_to_file(outfile, obj_data, color)
+
+    logger.info(f"Result saved in: '{str(outfile)}'.")
