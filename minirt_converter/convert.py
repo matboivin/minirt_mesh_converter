@@ -127,17 +127,13 @@ def save_polygons_to_file(
         obj_data
     )
 
-    with filename.open(mode="w", encoding="utf-8") as out:
+    triangles: List[str] = []
 
-        triangles: List[str] = []
+    for element in obj_data:
+        if element[:2] == "f ":  # Polygonal face element (f 1 2 3)
+            get_triangles_from_face(element, vertices_coords, color, triangles)
 
-        for element in obj_data:
-            if element[:2] == "f ":  # Polygonal face element (f 1 2 3)
-                get_triangles_from_face(
-                    element, vertices_coords, color, triangles
-                )
-
-        out.write("\n".join(triangles) + "\n")
+    filename.write_text("\n".join(triangles) + "\n")
 
 
 def convert_obj_to_rt(
