@@ -16,19 +16,15 @@ Convert `.obj` files to `.rt` files to render a triangle mesh effect for [miniRT
 
 ## Installation
 
-Clone the repository and change it to your working directory. Then install the project:
+1. Clone the repository and change it to your working directory.
 
-```console
-$ poetry install
-```
+2. Install the project:
+
+  ```console
+  $ poetry install
+  ```
 
 ## Usage
-
-Activate the virtual environment:
-
-```console
-$ source `poetry env info --path`/bin/activate
-```
 
 ```console
 minirt_converter [-h] filename color
@@ -46,7 +42,21 @@ example usage:
   minirt_converter file.obj 255,255,255
 ```
 
-Then, **add Resolution, Ambient Light, cameras and light points** to your [scene](https://github.com/matboivin/raytracer/blob/main/doc/scene_file.md).
+1. Activate the virtual environment:
+
+  ```console
+  $ source `poetry env info --path`/bin/activate
+  ```
+
+2. Run the project:
+
+  ```console
+  $ minirt_converter file.obj 255,255,255
+  ```
+
+3. Then, **add Resolution, Ambient Light, cameras and light points** to your [scene](https://github.com/matboivin/raytracer/blob/main/doc/scene_file.md).
+
+### Examples
 
 The `deer.rt`, `dragon.rt` and `wolf3d.rt` scenes can be found [here](https://github.com/matboivin/raytracer/tree/main/scenes).
 
