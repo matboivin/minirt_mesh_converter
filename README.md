@@ -16,13 +16,19 @@ Convert `.obj` files to `.rt` files to render a triangle mesh effect for [miniRT
 
 ## Installation
 
-Clone the repository and change it to your working directory.
+Clone the repository and change it to your working directory. Then install the project:
 
 ```console
 $ poetry install
 ```
 
 ## Usage
+
+Activate the virtual environment:
+
+```console
+$ source `poetry env info --path`/bin/activate
+```
 
 ```console
 minirt_converter [-h] filename color
